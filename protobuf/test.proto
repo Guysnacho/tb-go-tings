@@ -1,0 +1,13 @@
+syntax = "proto3";
+package protobuf;
+option go_package = "tunjiproductions.com/events/test";
+
+message TestHeader {
+    string title = 1;
+    string author = 2;
+    int64 timestamp = 3;
+}
+
+message TestBody {
+    string body = 1;
+}
