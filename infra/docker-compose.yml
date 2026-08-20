@@ -22,8 +22,8 @@ services:
       KAFKA_NUM_PARTITIONS: 3
     networks:
       kafka_net:
-    post_start:
-      - command: bash -c 'cd /opt/kafka/bin/ && ./kafka-topics.sh --bootstrap-server localhost:9092 --create --topic test-topic'
+    # post_start:
+    #   - command: bash -c 'cd /opt/kafka/bin/ && ./kafka-topics.sh --bootstrap-server localhost:9092 --create --topic test-topic'
         # user: root
 networks:
   kafka_net:
