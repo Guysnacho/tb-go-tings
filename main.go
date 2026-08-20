@@ -81,7 +81,7 @@ func (r routes) addTestRoutes(rg *gin.RouterGroup) {
 func createMessage(c *gin.Context) *[]byte {
 	var reqBody TestRequestBody
 	if err := c.BindJSON(&reqBody); err != nil {
-		log.Panicln("Womp womp, invalid request body - %v", err)
+		log.Panicf("Womp womp, invalid request body - %v\n", err)
 	}
 
 	header := test.TestHeader{

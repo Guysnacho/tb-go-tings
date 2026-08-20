@@ -10,8 +10,11 @@ import (
 	"sync"
 	"syscall"
 
+	"main/protobuf/tunjiproductions.com/events/test"
+
 	"github.com/IBM/sarama"
 	"github.com/google/uuid"
+	"google.golang.org/protobuf/proto"
 )
 
 var (
@@ -126,8 +129,14 @@ func (consumer *Consumer) ConsumeClaim(session sarama.ConsumerGroupSession, clai
 				log.Printf("message channel was closed")
 				return nil
 			}
-			log.Printf("Message claimed: value = %s, timestamp = %v, topic = %s", string(message.Value), message.Timestamp, message.Topic)
-			session.MarkMessage(message, "")
+			value, err := decodeMessage(&message.Value)
+			if err != nil {
+				log.Printf("Message claimed but errored: timestamp = %v, topic = %s", message.Timestamp, message.Topic)
+				session.MarkMessage(message, "errored - "+err.Error())
+			} else {
+				log.Printf("Message claimed: value = %+v, timestamp = %v, topic = %s", value, message.Timestamp, message.Topic)
+				session.MarkMessage(message, "")
+			}
 		// Should return when `session.Context()` is done.
 		// If not, will raise `ErrRebalanceInProgress` or `read tcp <ip>:<port>: i/o timeout` when kafka rebalance. see:
 		// https://github.com/IBM/sarama/issues/1192
@@ -135,4 +144,14 @@ func (consumer *Consumer) ConsumeClaim(session sarama.ConsumerGroupSession, clai
 			return nil
 		}
 	}
+}
+
+func decodeMessage(data *[]byte) (*test.TestMessage, error) {
+	var message test.TestMessage
+	err := proto.Unmarshal((*data), &message)
+	if err != nil {
+		log.Printf("Failed to deserialize this one gangy... - %v\n", err)
+		return nil, err
+	}
+	return &message, nil
 }
