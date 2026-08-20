@@ -36,6 +36,8 @@ func initRoutes() routes {
 }
 
 func (r routes) Run(addr ...string) error {
+	// start consumers
+	InitConsumers()
 	return r.router.Run()
 }
 
@@ -48,6 +50,9 @@ func Hello(c *gin.Context) {
 func Create(c *gin.Context) {
 	producers := NewPublisher()
 	publisher := *producers.producer
+	// header := &test.TestHeader{
+	// 	title:
+	// }
 
 	partition, offset, err := publisher.SendMessage(&sarama.ProducerMessage{
 		Topic: "test-topic",
@@ -69,3 +74,7 @@ func (r routes) addTestRoutes(rg *gin.RouterGroup) {
 	rg.GET("/hello", Hello)
 	rg.POST("", Create)
 }
+
+// func createMessage(*c.Request.Body)  {
+
+// }
