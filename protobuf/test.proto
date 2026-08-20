@@ -9,5 +9,10 @@ message TestHeader {
 }
 
 message TestBody {
-    string body = 1;
+    string content = 1;
+}
+
+message TestMessage {
+    TestHeader header = 1;
+    TestBody body = 2;
 }
