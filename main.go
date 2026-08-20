@@ -37,7 +37,7 @@ func initRoutes() routes {
 
 func (r routes) Run(addr ...string) error {
 	// start consumers
-	InitConsumers()
+	go InitConsumers()
 	return r.router.Run()
 }
 
