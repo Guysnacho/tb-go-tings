@@ -4,6 +4,7 @@ import (
 	fmt "fmt"
 	"net/http"
 
+	"github.com/IBM/sarama"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
@@ -27,7 +28,7 @@ func initRoutes() routes {
 		router: gin.Default(),
 	}
 
-	hello := r.router.Group("/hello")
+	hello := r.router.Group("/test")
 
 	r.addTestRoutes(hello)
 
@@ -44,11 +45,27 @@ func Hello(c *gin.Context) {
 	})
 }
 
+func Create(c *gin.Context) {
+	producers := NewPublisher()
+	publisher := *producers.producer
+
+	partition, offset, err := publisher.SendMessage(&sarama.ProducerMessage{
+		Topic: "test-topic",
+		Value: sarama.StringEncoder("sumn sumn"),
+	})
+	if err != nil {
+		panic(err.Error())
+	}
+
+	fmt.Printf("partition=%d, offset=%d\n", partition, offset)
+}
+
 func (r routes) addTestRoutes(rg *gin.RouterGroup) {
 	rg.Use(cors.New(cors.Config{
 		AllowAllOrigins: true,
-		AllowMethods:    []string{"GET"},
+		AllowMethods:    []string{"GET", "POST"},
 	}))
 
-	rg.GET("/", Hello)
+	rg.GET("/hello", Hello)
+	rg.POST("", Create)
 }
