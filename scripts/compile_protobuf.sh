@@ -1,2 +1,2 @@
 #!/bin/bash
-protoc --proto_path=../protobuf --go_out=../protobuf test.proto
+protoc --proto_path=../protobuf --go_out=../ test.proto

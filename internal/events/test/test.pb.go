@@ -192,7 +192,7 @@ const file_test_proto_rawDesc = "" +
 	"\acontent\x18\x01 \x01(\tR\acontent\"c\n" +
 	"\vTestMessage\x12,\n" +
 	"\x06header\x18\x01 \x01(\v2\x14.protobuf.TestHeaderR\x06header\x12&\n" +
-	"\x04body\x18\x02 \x01(\v2\x12.protobuf.TestBodyR\x04bodyB\"Z tunjiproductions.com/events/testb\x06proto3"
+	"\x04body\x18\x02 \x01(\v2\x12.protobuf.TestBodyR\x04bodyB\x16Z\x14internal/events/testb\x06proto3"
 
 var (
 	file_test_proto_rawDescOnce sync.Once

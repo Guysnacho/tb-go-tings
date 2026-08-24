@@ -1,16 +1,15 @@
-package main
+package events
 
 import (
 	"context"
 	"errors"
+	test "main/internal/events/test"
 	"log"
 	"os"
 	"os/signal"
 	"strings"
 	"sync"
 	"syscall"
-
-	"main/protobuf/tunjiproductions.com/events/test"
 
 	"github.com/IBM/sarama"
 	"github.com/google/uuid"
