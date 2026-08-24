@@ -22,7 +22,7 @@ We'll add access control and allat too. Since its not postgres we don't get any 
   - HTTP Handlers
     - [x] Hello world
     - [ ] CRUD for user (i.e. save transaction, fetch transactions, void transactions)
-    - [ ] CRUD for admin (i.e. fetch transactions, void transactions)
+    - [-] CRUD for admin (i.e. create accounts, fetch transactions, void transactions)
 
 ### The Veins
 
