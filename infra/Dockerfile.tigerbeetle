@@ -7,6 +7,6 @@ WORKDIR tigerbeetle
 RUN curl -Lo tigerbeetle.zip https://linux.tigerbeetle.com && unzip tigerbeetle.zip
 RUN ./tigerbeetle version
 
-EXPOSE 3000
+EXPOSE 3030
 
-ENTRYPOINT ["sh", "-c", "test -f 0_0.tigerbeetle || ./tigerbeetle format --cluster=0 --replica=0 --replica-count=1 --development 0_0.tigerbeetle; exec ./tigerbeetle start --addresses=0.0.0.0:3000 --development 0_0.tigerbeetle"]
+ENTRYPOINT ["sh", "-c", "test -f 0_0.tigerbeetle || ./tigerbeetle format --cluster=0 --replica=0 --replica-count=1 --development 0_0.tigerbeetle; exec ./tigerbeetle start --addresses=0.0.0.0:3030 --development 0_0.tigerbeetle"]
