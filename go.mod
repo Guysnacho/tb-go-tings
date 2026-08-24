@@ -8,6 +8,8 @@ require (
 	github.com/gin-gonic/gin v1.12.0
 )
 
+require github.com/tigerbeetle/tigerbeetle-go v0.17.9 // indirect
+
 require (
 	github.com/bytedance/gopkg v0.1.3 // indirect
 	github.com/bytedance/sonic v1.15.0 // indirect
