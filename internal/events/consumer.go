@@ -3,8 +3,8 @@ package events
 import (
 	"context"
 	"errors"
-	test "main/internal/events/test"
 	"log"
+	test "main/internal/events/test"
 	"os"
 	"os/signal"
 	"strings"
@@ -48,7 +48,7 @@ func InitConsumers() {
 		}
 	}()
 
-	<-consumer.ready // for some reason this awaits for some reason
+	<-consumer.ready // for some reason this awaits
 	log.Println("Successfully spun up Sarama consumer. TURN ME UUUUUUPPPP")
 
 	sigterm := make(chan os.Signal, 1)
@@ -69,6 +69,7 @@ func InitConsumers() {
 	if err := (*cg).Close(); err != nil {
 		log.Panicf("Error closing client: %v", err)
 	}
+	log.Panicln("Successfully finished closing consumers. Less than gracefully closing app.")
 }
 
 func newConsumerGroup(brokerList []string, version sarama.KafkaVersion) (*sarama.ConsumerGroup, Consumer) {
