@@ -9,7 +9,7 @@ import (
 
 var (
 	clusterId        = 0
-	addresses string = "0.0.0.0:3000"
+	addresses string = "3030"
 	Client    *tb.Client
 )
 
