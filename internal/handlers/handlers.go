@@ -1,9 +1,7 @@
 package handlers
 
 import (
-	"encoding/json/v2"
 	"fmt"
-	"log"
 	"net/http"
 
 	events "main/internal/events"
@@ -39,13 +37,14 @@ func Create(c *gin.Context) {
 
 func GetAccounts(c *gin.Context) {
 	accounts := services.FetchAllAccounts()
-	data, err := json.Marshal((*accounts))
+	// accountString := fmt.Sprintf("%v", (*accounts))
+	// data, err := json.Marshal(accountString)
 
-	if err != nil {
-		log.Fatalf("Failed to serialize response - %v\n", err)
-	}
+	// if err != nil {
+	// 	log.Fatalf("Failed to serialize response - %v\n", err)
+	// }
 
 	c.JSON(http.StatusOK, gin.H{
-		"status": data,
+		"status": (*accounts),
 	})
 }
